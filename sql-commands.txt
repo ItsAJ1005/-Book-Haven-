@@ -1,0 +1,81 @@
+-- Create the Management database
+CREATE DATABASE IF NOT EXISTS BookShopManagement;
+
+-- Switch to the Management database
+USE BookShopManagement;
+
+-- Create the Books table
+CREATE TABLE IF NOT EXISTS Books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    auth VARCHAR(255),
+    price INT,
+    qty INT,
+    INDEX(name)
+);
+
+-- Create the Suppliers table
+CREATE TABLE IF NOT EXISTS Suppliers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    phn LONG,
+    addr_line1 VARCHAR(255),
+    addr_line2 VARCHAR(255),
+    addr_city VARCHAR(255),
+    addr_state VARCHAR(255),
+    INDEX(name)
+);
+
+-- Create the Purchases table
+CREATE TABLE IF NOT EXISTS Purchases (
+    ord_id INT AUTO_INCREMENT PRIMARY KEY,
+    book_id INT,
+    sup_id INT,
+    qty INT,
+    dt_ordered DATE,
+    eta INT,
+    received CHAR(1) DEFAULT 'F' CHECK (received IN ('T', 'C', 'F')),
+    inv INT,
+    FOREIGN KEY (book_id) REFERENCES Books(id),
+    FOREIGN KEY (sup_id) REFERENCES Suppliers(id)
+);
+
+-- Create the Employees table
+CREATE TABLE IF NOT EXISTS Employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    addr_line1 VARCHAR(255),
+    addr_line2 VARCHAR(255),
+    addr_city VARCHAR(255),
+    addr_state VARCHAR(255),
+    phn LONG,
+    date_of_joining DATE,
+    salary LONG,
+    mgr_status CHAR(1) DEFAULT 'F' CHECK (mgr_status IN ('T', 'F'))
+);
+
+-- Create the Members table
+CREATE TABLE IF NOT EXISTS Members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    addr_line1 VARCHAR(255),
+    addr_line2 VARCHAR(255),
+    addr_city VARCHAR(255),
+    addr_state VARCHAR(255),
+    phn LONG,
+    beg_date DATE,
+    end_date DATE,
+    valid VARCHAR(255)
+);
+
+-- Create the Sales table
+CREATE TABLE IF NOT EXISTS Sales (
+    invoice_id INT AUTO_INCREMENT PRIMARY KEY,
+    member_id INT,
+    book_id INT,
+    qty INT,
+    amount INT,
+    date_s DATE,
+    FOREIGN KEY (member_id) REFERENCES Members(id),
+    FOREIGN KEY (book_id) REFERENCES Books(id)
+);
