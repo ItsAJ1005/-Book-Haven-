@@ -4,7 +4,7 @@
 
 #include<iostream>
 #include<windows.h>  								//For windows API functions and constants
-#include "includeThese/mysql.h"						//For Sql connectivity, C++ connector
+#include<mysql.h>								//For Sql connectivity, C++ connector. This sholud be linked manually from sql installer if not present.
 #include<sstream>    								//String stream manipulation
 #include<conio.h> 
 #include<vector>  
@@ -14,7 +14,7 @@
 #define USER "root"
 #define DATABASE "bookshopmanagement"
 #define PORT 3306
-#define APP_PASS 1234   		//You can change this application password in 4 digit format  
+#define APP_PASS 1234   							//You can change this application password in 4 digit format  
 
 using namespace std;
 
