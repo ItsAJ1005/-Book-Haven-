@@ -139,6 +139,7 @@ class books {
 			}
 		}
 
+		// Update purchases
 		void update()
 		{
 			vector<int> b_id, qty;
